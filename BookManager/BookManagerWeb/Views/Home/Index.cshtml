@@ -1,0 +1,73 @@
+﻿@{
+    ViewData["Title"] = "BookManager - Home";
+}
+
+<div class="container mt-4">
+    <div class="text-center mb-5">
+        <h1 class="display-4">BookManager</h1>
+        <p class="lead">Manage your PDG book collection with ease</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-folder2-open"></i> Browse Books
+                    </h5>
+                    <p class="card-text">Navigate through your file system to find and manage book directories.</p>
+                    <a href="@Url.Action("Browse", "Books")" class="btn btn-primary">Start Browsing</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">
+                        <i class="bi bi-search"></i> Search Books
+                    </h5>
+                    <p class="card-text">Search for books in a directory tree by scanning for bookinfo.dat files.</p>
+                    <a href="@Url.Action("Search", "Books")" class="btn btn-primary">Search Books</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Available Drives</h5>
+                    <div class="list-group">
+                        @{
+                            var drives = ViewBag.Drives as List<string>;
+                            if (drives != null)
+                            {
+                                foreach (var drive in drives)
+                                {
+                                    <a href="@Url.Action("Browse", "Books", new { path = drive })" 
+                                       class="list-group-item list-group-item-action">
+                                        <i class="bi bi-hdd"></i> @drive
+                                    </a>
+                                }
+                            }
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <div class="alert alert-info">
+                <h5><i class="bi bi-info-circle"></i> About BookManager</h5>
+                <p>BookManager is a web-based tool for managing PDG book files and their metadata. 
+                   It allows you to browse directories, view book information, edit metadata stored 
+                   in bookinfo.dat files, and search for books across your file system.</p>
+                <p class="mb-0">This is a .NET 8 ASP.NET MVC conversion of the original VB6 BookManager application.</p>
+            </div>
+        </div>
+    </div>
+</div>

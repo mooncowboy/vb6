@@ -1,0 +1,119 @@
+@model dynamic
+@{
+    ViewData["Title"] = "Browse Books";
+    var currentPath = ViewBag.CurrentPath as string;
+    var folders = ViewBag.Folders as List<BookManagerWeb.Models.FolderItem>;
+    var parentPath = ViewBag.ParentPath as string;
+    var drives = ViewBag.Drives as List<string>;
+}
+
+<div class="container mt-4">
+    <h2>Browse Books</h2>
+    
+    @if (TempData["Error"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            @TempData["Error"]
+            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+        </div>
+    }
+
+    @if (string.IsNullOrEmpty(currentPath))
+    {
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Select a Drive</h5>
+                <div class="list-group">
+                    @if (drives != null)
+                    {
+                        @foreach (var drive in drives)
+                        {
+                            <a href="@Url.Action("Browse", new { path = drive })" 
+                               class="list-group-item list-group-item-action">
+                                <i class="bi bi-hdd"></i> @drive
+                            </a>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    }
+    else
+    {
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <a href="@Url.Action("Browse")">
+                        <i class="bi bi-house"></i> Drives
+                    </a>
+                </li>
+                @if (!string.IsNullOrEmpty(parentPath))
+                {
+                    <li class="breadcrumb-item">
+                        <a href="@Url.Action("Browse", new { path = parentPath })">
+                            <i class="bi bi-arrow-up"></i> Parent
+                        </a>
+                    </li>
+                }
+                <li class="breadcrumb-item active" aria-current="page">@currentPath</li>
+            </ol>
+        </nav>
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">
+                    <i class="bi bi-folder2-open"></i> Current Path: @currentPath
+                </h5>
+            </div>
+            <div class="card-body">
+                @if (folders != null && folders.Any())
+                {
+                    <div class="list-group">
+                        @foreach (var folder in folders)
+                        {
+                            <div class="list-group-item">
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-1">
+                                            <i class="bi bi-folder"></i> @folder.Name
+                                            @if (folder.HasBookInfo)
+                                            {
+                                                <span class="badge bg-success ms-2">
+                                                    <i class="bi bi-book"></i> Book
+                                                </span>
+                                            }
+                                        </h6>
+                                        <small class="text-muted">
+                                            Last modified: @folder.LastModified?.ToString("yyyy-MM-dd HH:mm:ss")
+                                        </small>
+                                    </div>
+                                    <div class="btn-group" role="group">
+                                        <a href="@Url.Action("Browse", new { path = folder.Path })" 
+                                           class="btn btn-sm btn-outline-primary">
+                                            <i class="bi bi-folder2-open"></i> Open
+                                        </a>
+                                        @if (folder.HasBookInfo)
+                                        {
+                                            <a href="@Url.Action("Details", new { path = folder.Path })" 
+                                               class="btn btn-sm btn-outline-info">
+                                                <i class="bi bi-info-circle"></i> Details
+                                            </a>
+                                            <a href="@Url.Action("Edit", new { path = folder.Path })" 
+                                               class="btn btn-sm btn-outline-warning">
+                                                <i class="bi bi-pencil"></i> Edit
+                                            </a>
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <p class="text-muted">No subdirectories found.</p>
+                }
+            </div>
+        </div>
+    }
+</div>
