@@ -1,0 +1,96 @@
+@{
+    ViewData["Title"] = "About BookManager";
+}
+
+<div class="container mt-4">
+    <h2>About BookManager</h2>
+    
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-info-circle"></i> Application Information
+            </h5>
+            <p class="card-text">
+                BookManager is a web-based application for managing PDG (Chinese e-book format) book files 
+                and their associated metadata.
+            </p>
+            <p class="card-text">
+                This is a modern .NET 8 ASP.NET MVC conversion of the original VB6 BookManager desktop application.
+            </p>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-list-check"></i> Features
+            </h5>
+            <ul>
+                <li>Browse file system directories to find book collections</li>
+                <li>View detailed book information from bookinfo.dat metadata files</li>
+                <li>Edit and save book metadata</li>
+                <li>Search for books across directory trees</li>
+                <li>Display book covers (when available as JPG files)</li>
+                <li>Support for Chinese book metadata fields</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-file-earmark-text"></i> Book Metadata Fields
+            </h5>
+            <p class="card-text">
+                The application manages the following metadata fields stored in bookinfo.dat files:
+            </p>
+            <div class="row">
+                <div class="col-md-6">
+                    <ul>
+                        <li>Title (书名)</li>
+                        <li>Author (作者)</li>
+                        <li>SS ID (SS号)</li>
+                        <li>Publisher (出版社)</li>
+                        <li>Publish Date (出版日期)</li>
+                        <li>Pages Count (页数)</li>
+                        <li>Subject (主题)</li>
+                        <li>Comments (备注)</li>
+                    </ul>
+                </div>
+                <div class="col-md-6">
+                    <ul>
+                        <li>URL (地址)</li>
+                        <li>SS URL (SS地址)</li>
+                        <li>JPG URL (JPG地址)</li>
+                        <li>Parameters (参数)</li>
+                        <li>Saved In (保存在)</li>
+                        <li>Downloader (下载人)</li>
+                        <li>Download Date (下载日期)</li>
+                        <li>And more...</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">
+                <i class="bi bi-code-square"></i> Technology Stack
+            </h5>
+            <ul>
+                <li>.NET 8</li>
+                <li>ASP.NET Core MVC</li>
+                <li>C#</li>
+                <li>Bootstrap 5</li>
+                <li>Bootstrap Icons</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-3">
+        <a href="@Url.Action("Index", "Home")" class="btn btn-primary">
+            <i class="bi bi-arrow-left"></i> Back to Home
+        </a>
+    </div>
+</div>
